@@ -1,0 +1,20 @@
+package dnd
+
+import (
+	"github.com/alexw1983/monkeycom-go-v2/models"
+	"github.com/alexw1983/monkeycom-go-v2/views"
+	"strconv"
+)
+
+templ Character(character models.Character) {
+	@views.Layout(true, character.Name) {
+		<h2>{ character.Name }</h2>
+		<p>{ character.Bio }</p>
+		<p>Strength: { strconv.Itoa(character.Strength.Value) }</p>
+		<p>Constitution: { strconv.Itoa(character.Constitution.Value) }</p>
+		<p>Dexterity: { strconv.Itoa(character.Dexterity.Value) }</p>
+		<p>Intelligence: { strconv.Itoa(character.Intelligence.Value) }</p>
+		<p>Wisdom: { strconv.Itoa(character.Wisdom.Value) }</p>
+		<p>Charisma: { strconv.Itoa(character.Charisma.Value) }</p>
+	}
+}

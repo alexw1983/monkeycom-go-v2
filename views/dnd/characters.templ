@@ -1,0 +1,20 @@
+package dnd
+
+import "github.com/alexw1983/monkeycom-go-v2/models"
+import "github.com/alexw1983/monkeycom-go-v2/views"
+import "fmt"
+
+templ Characters(characters []models.Character) {
+	@views.Layout(true, "Characters") {
+		<p>List of characters:</p>
+		<p>Click on a character's name to view their details.</p>
+		<ul>
+			for _, character := range characters {
+				<li>
+					<a href={ templ.URL(fmt.Sprintf("/dnd/character/%s", character.Slug)) }>{ character.Name }</a>
+					<p>{ character.Bio }</p>
+				</li>
+			}
+		</ul>
+	}
+}
