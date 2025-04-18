@@ -3,18 +3,14 @@ package dnd
 import (
 	"github.com/alexw1983/monkeycom-go-v2/models"
 	"github.com/alexw1983/monkeycom-go-v2/views"
-	"strconv"
+	"github.com/alexw1983/monkeycom-go-v2/views/dnd/components"
+	"github.com/markbates/goth"
 )
 
-templ Character(character models.Character) {
-	@views.Layout(true, character.Name) {
-		<h2>{ character.Name }</h2>
-		<p>{ character.Bio }</p>
-		<p>Strength: { strconv.Itoa(character.Strength.Value) }</p>
-		<p>Constitution: { strconv.Itoa(character.Constitution.Value) }</p>
-		<p>Dexterity: { strconv.Itoa(character.Dexterity.Value) }</p>
-		<p>Intelligence: { strconv.Itoa(character.Intelligence.Value) }</p>
-		<p>Wisdom: { strconv.Itoa(character.Wisdom.Value) }</p>
-		<p>Charisma: { strconv.Itoa(character.Charisma.Value) }</p>
+templ Character(user goth.User, character models.Character) {
+	@views.Layout(true, character.Name, user) {
+		@components.CharacterMeta(character)
+		<hr/>
+		@components.Attributes(character)
 	}
 }

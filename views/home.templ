@@ -1,13 +1,15 @@
 package views
 
-templ Home() {
-	@Layout(true, "D&D 5e 2024") {
+import "github.com/markbates/goth"
+
+templ Home(user goth.User) {
+	@Layout(true, "D&D 5e 2024", user) {
 		<ul>
 			<li>
-				<a href="/dnd-2024/character-generator">Character Generator</a>
+				<a href="/dnd/character-generator">Character Generator</a>
 			</li>
 			<li>
-				<a href="/dnd-2024/characters">Character List</a>
+				<a href="/dnd/characters">Character List</a>
 			</li>
 		</ul>
 	}

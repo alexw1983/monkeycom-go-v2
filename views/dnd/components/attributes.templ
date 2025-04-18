@@ -1,0 +1,266 @@
+package components
+
+import "github.com/alexw1983/monkeycom-go-v2/models"
+import "strconv"
+
+templ Attributes(character models.Character) {
+	<style>
+
+    </style>
+	<div class="row">
+		<div class="col-sm-12 col-md-4">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Proficiency Bonus</h6>
+								+{ strconv.Itoa(character.GetProficiencyBonus()) }
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Strength</h6>
+								@AttributeBox(character.Strength)
+								<ul class="list-group">
+									<li class="list-group-item">
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="checkbox"
+												value=""
+												onclick="return false;"
+												id="checkDefault"
+												checked={ strconv.FormatBool(character.Strength.SavingThrow) }
+											/>
+											<label class="form-check-label" for="checkDefault">
+												Saving Throw
+											</label>
+										</div>
+									</li>
+								</ul>
+								<ul class="list-group">
+									<li class="list-group-item">
+										@SkillRow(character.Athletics, "Athletics")
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Dexterity</h6>
+								@AttributeBox(character.Dexterity)
+								<ul class="list-group">
+									<li class="list-group-item">
+										@SkillRow(character.Acrobatics, "Acrobatics")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.SleightOfHand, "Sleight of Hand")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Stealth, "Stealth")
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Constitution</h6>
+								@AttributeBox(character.Constitution)
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Heroic Inspiration</h6>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="box mb-2">
+								<h6>Intelligence</h6>
+								@AttributeBox(character.Intelligence)
+								<ul class="list-group">
+									<li class="list-group-item">
+										@SkillRow(character.Arcana, "Arcana")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.History, "History")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Investigation, "Investigation")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Nature, "Nature")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Religion, "Religion")
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Wisdom</h6>
+								@AttributeBox(character.Wisdom)
+								<ul class="list-group">
+									<li class="list-group-item">
+										@SkillRow(character.AnimalHandling, "Animal Handling")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Insight, "Insight")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Medicine, "Medicine")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Perception, "Perception")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Survival, "Survival")
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-sm-12">
+							<div class="box">
+								<h6>Charisma</h6>
+								@AttributeBox(character.Charisma)
+								<ul class="list-group">
+									<li class="list-group-item">
+										@SkillRow(character.Deception, "Deception")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Intimidation, "Intimidation")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Performance, "Performance")
+									</li>
+									<li class="list-group-item">
+										@SkillRow(character.Persuasion, "Persuasion")
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="box">
+						<h6>Equipment Training and Proficiencies</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-8">
+			<div class="row mb-2">
+				<div class="col-sm-3">
+					<div class="box"><h6>Initiative</h6></div>
+				</div>
+				<div class="col-sm-3">
+					<div class="box"><h6>Speed</h6></div>
+				</div>
+				<div class="col-sm-3">
+					<div class="box"><h6>Size</h6></div>
+				</div>
+				<div class="col-sm-3">
+					<div class="box"><h6>Passive Perception</h6></div>
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col">
+					<div class="box"><h6>Weapons and damage cantrips</h6></div>
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col">
+					<div class="box"><h6>Class features</h6></div>
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<div class="box"><h6>Species Traits</h6></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="box"><h6>Feats</h6></div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+templ AttributeBox(a models.Attribute) {
+	<style>
+    .attribute-box{
+        display: flex;
+        align-items: end;
+        gap: 1rem;
+    }
+
+    .modifier-value{
+        border: 1px solid grey;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .modifier-label{
+        font-size: 0.75rem;
+    }
+
+    .score-value { 
+        border: 1px solid grey;
+        border-radius: 8px;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .score-label {
+        font-size: 0.75rem;
+    }
+    </style>
+	<div class="attribute-box">
+		<div class="modifier">
+			<p class="modifier-value">{ strconv.Itoa(a.GetModifier()) }</p>
+			<p class="modifier-label">Modifier</p>
+		</div>
+		<div class="score">
+			<p class="score-value">{ strconv.Itoa(a.Value) }</p>
+			<p class="score-label">Score</p>
+		</div>
+	</div>
+}
+
+templ SkillRow(s models.Skill, label string) {
+	<input
+		class="form-check-input"
+		type="checkbox"
+		value=""
+		onclick="return false;"
+		id="checkDefault"
+		if s.Proficient {
+			checked="checked"
+		}
+	/>
+	<label class="form-check-label" for="checkDefault">
+		{ label }
+	</label>
+}

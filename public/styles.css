@@ -1,3 +1,13 @@
 h1 {
-  color: Pink;
+  color: red;
+}
+
+main {
+  min-height: 200px;
+}
+
+.box {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1rem;
 }

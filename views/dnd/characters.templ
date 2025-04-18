@@ -1,12 +1,14 @@
 package dnd
 
-import "github.com/alexw1983/monkeycom-go-v2/models"
-import "github.com/alexw1983/monkeycom-go-v2/views"
-import "fmt"
+import (
+	"fmt"
+	"github.com/alexw1983/monkeycom-go-v2/models"
+	"github.com/alexw1983/monkeycom-go-v2/views"
+	"github.com/markbates/goth"
+)
 
-templ Characters(characters []models.Character) {
-	@views.Layout(true, "Characters") {
-		<p>List of characters:</p>
+templ Characters(user goth.User, characters []models.Character) {
+	@views.Layout(true, "Characters", user) {
 		<p>Click on a character's name to view their details.</p>
 		<ul>
 			for _, character := range characters {

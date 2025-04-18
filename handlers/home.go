@@ -7,5 +7,6 @@ import (
 )
 
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
-	views.Home().Render(r.Context(), w)
+	u, _ := h.auth.GetUserSession(r)
+	views.Home(u).Render(r.Context(), w)
 }

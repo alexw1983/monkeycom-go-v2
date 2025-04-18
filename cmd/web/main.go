@@ -8,6 +8,7 @@ import (
 	"github.com/alexw1983/monkeycom-go-v2/config"
 	"github.com/alexw1983/monkeycom-go-v2/db"
 	"github.com/alexw1983/monkeycom-go-v2/handlers"
+	"github.com/alexw1983/monkeycom-go-v2/services/auth"
 	"github.com/gorilla/mux"
 )
 
@@ -23,11 +24,29 @@ func main() {
 	// }
 
 	router := mux.NewRouter()
-	handlers := handlers.NewHandler(db)
 
-	router.HandleFunc("/", handlers.Home).Methods("GET")
-	router.HandleFunc("/dnd/characters", handlers.Characters).Methods("GET")
-	router.HandleFunc("/dnd/character/{slug}", handlers.Character).Methods("GET")
+	sessionsStore := auth.NewCookieStore(auth.SessionOptions{
+		CookiesKey: config.Envs.SessionCookieKey,
+		MaxAge:     config.Envs.SessionMaxAge,
+		HttpOnly:   config.Envs.SessionHttpOnly,
+		Secure:     config.Envs.SessionSecure,
+	})
+	authService := auth.NewAuthService(sessionsStore)
+
+	handlers := handlers.NewHandler(db, authService)
+
+	// Home
+	router.HandleFunc("/", auth.RequireAuth(handlers.Home, authService)).Methods("GET")
+
+	// DnD
+	router.HandleFunc("/dnd/characters", auth.RequireAuth(handlers.Characters, authService)).Methods("GET")
+	router.HandleFunc("/dnd/character/{slug}", auth.RequireAuth(handlers.Character, authService)).Methods("GET")
+
+	// Auth
+	router.HandleFunc("/auth/{provider}", handlers.ProviderLogin).Methods("GET")
+	router.HandleFunc("/auth/{provider}/callback", handlers.ProviderCallback).Methods("GET")
+	router.HandleFunc("/auth/logout/provider", nil).Methods("GET")
+	router.HandleFunc("/login", handlers.Login).Methods("GET")
 
 	// serve files in public
 	router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
