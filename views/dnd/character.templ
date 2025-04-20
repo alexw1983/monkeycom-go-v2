@@ -11,6 +11,13 @@ templ Character(user goth.User, character models.Character) {
 	@views.Layout(true, character.Name, user) {
 		@components.CharacterMeta(character)
 		<hr/>
-		@components.Attributes(character)
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				@components.Attributes(character)
+			</div>
+			<div class="col-sm-12 col-md-6">
+				@components.DicePit()
+			</div>
+		</div>
 	}
 }

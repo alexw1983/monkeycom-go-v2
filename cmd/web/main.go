@@ -41,6 +41,7 @@ func main() {
 	// DnD
 	router.HandleFunc("/dnd/characters", auth.RequireAuth(handlers.Characters, authService)).Methods("GET")
 	router.HandleFunc("/dnd/character/{slug}", auth.RequireAuth(handlers.Character, authService)).Methods("GET")
+	router.HandleFunc("/dnd/character/{slug}/roll/{skill}", auth.RequireAuth(handlers.RollSkill, authService)).Methods("GET")
 
 	// Auth
 	router.HandleFunc("/auth/{provider}", handlers.ProviderLogin).Methods("GET")

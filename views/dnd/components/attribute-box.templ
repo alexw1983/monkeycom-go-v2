@@ -1,0 +1,124 @@
+package components
+
+import (
+	"github.com/alexw1983/monkeycom-go-v2/models"
+	"strconv"
+)
+
+func GetModifierString(value int) string {
+	if value > 0 {
+		return "( +" + strconv.Itoa(value) + ")"
+	}
+	return "( " + strconv.Itoa(value) + ")"
+}
+
+func GetRollSkillURL(c models.Character, s models.Skill) string {
+	return "/dnd/character/" + c.Slug + "/roll/" + s.String()
+}
+
+templ AttributeBox(displayText string, character models.Character, attribute models.Attribute, skills []models.Skill) {
+	<style>
+        .attribute-box {
+            display: flex;
+            justify-content: center;
+            gap: 1rem; 
+        }
+
+        .number-box {
+            border-radius: 8px;
+            padding: 0.5rem;margin-bottom: 0;
+            width: 50px;
+            text-align: center;
+        }
+
+        .modifier-value {
+            border: 1px solid blue;
+            color: blue;
+            
+        }
+
+        .modifier-label {
+            font-size: 0.75rem;
+        }
+
+        .score-value { 
+            border: 1px solid grey;
+        }
+
+        .skill-row:hover {
+            background-color: #f0f0f0;
+            cursor:pointer;
+        }
+
+       
+    </style>
+	<div class="box">
+		<h6>{ displayText }</h6>
+		<div class="attribute-box">
+			<div>
+				<div class="number-box score-value">{ strconv.Itoa(attribute.Value) }</div>
+				<p class="modifier-label">Score</p>
+			</div>
+			<div>
+				<div class="number-box modifier-value">
+					if attribute.GetModifier() > 0 {
+						+
+					}
+					{ strconv.Itoa(attribute.GetModifier()) }
+				</div>
+				<p class="modifier-label">Modifier</p>
+			</div>
+		</div>
+		<div class="row rounded border p-1 mb-2 skill-row">
+			<div class="col-9">
+				<p class="m-0">Saving Throw</p>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-1">
+				<input
+					type="radio"
+					id="strength_saving_throw"
+					onclick="return false;"
+					if character.Strength.SavingThrow {
+						checked
+					}
+				/>
+			</div>
+		</div>
+		for _, skill := range skills {
+			<div
+				class="row rounded border p-1 skill-row"
+				hx-get={ GetRollSkillURL(character, skill) }
+				hx-target="#DicePit"
+				hx-swap="beforeend scroll:bottom"
+				hx-indicator="#DiceLoader"
+			>
+				<div class="col-9">
+					<p class="m-0">
+						{ skill.String() } <span>{ GetModifierString(character.GetAttributeBonus(skill)) }</span>
+					</p>
+				</div>
+				<div class="col-1">
+					<input
+						type="radio"
+						id="proficient"
+						onclick="return false;"
+						if character.IsProficient(skill) {
+							checked
+						}
+					/>
+				</div>
+				<div class="col-1">
+					<input
+						type="radio"
+						id="proficient"
+						onclick="return false;"
+						if character.HasExpertise(skill) {
+							checked
+						}
+					/>
+				</div>
+			</div>
+		}
+	</div>
+}

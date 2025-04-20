@@ -34,7 +34,7 @@ func CharacterMeta(character models.Character) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<style>\n\t\t.detail-wrapper{\n\t\t\tposition:relative;\n\t\t\tmargin-bottom: 1.5rem;\n\t\t}\n\t\t.detail {\n\t\t\tborder-bottom: 1px solid black;\n\t\t\tmin-height: 1.5rem;\n\t\t}\n\t\t.detail-label {\n\t\t\tfont-size: 0.75rem;\n\t\t\tfont-weight: 400;\n\t\t\ttext-transform: uppercase;\n\t\t\tposition:absolute;\n\t\t\ttop:100%;\n\t\t\tcolor: #aaa;\n\t\t}\n\t</style><div class=\"row\"><div class=\"col-sm-4\"><div class=\"box\"><div class=\"row\"><div class=\"col-12\"><div class=\"detail-wrapper\"><p class=\"detail\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<style>\n\t\t.detail-wrapper{\n\t\t\tposition:relative;\n\t\t\tmargin-bottom: 1.5rem;\n\t\t}\n\t\t.detail {\n\t\t\tborder-bottom: 1px solid black;\n\t\t\tmin-height: 1.5rem;\n\t\t}\n\t\t.detail-label {\n\t\t\tfont-size: 0.75rem;\n\t\t\tfont-weight: 400;\n\t\t\ttext-transform: uppercase;\n\t\t\tposition:absolute;\n\t\t\ttop:100%;\n\t\t\tcolor: #aaa;\n\t\t}\n\t</style><div class=\"row\"><div class=\"col-xs-12 col-sm-5\"><div class=\"box\"><div class=\"row\"><div class=\"col-12\"><div class=\"detail-wrapper\"><p class=\"detail\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -99,7 +99,7 @@ func CharacterMeta(character models.Character) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</p><span class=\"detail-label\">SubClass</span></div></div></div></div></div><div class=\"col-sm-1\"><div class=\"box\"><div class=\"detail-wrapper\"><p class=\"detail\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</p><span class=\"detail-label\">SubClass</span></div></div></div></div></div><div class=\"col-xs-12 col-sm-2\"><div class=\"box\"><div class=\"detail-wrapper\"><p class=\"detail\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -125,20 +125,33 @@ func CharacterMeta(character models.Character) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</p><span class=\"detail-label\">XP</span></div></div></div><div class=\"col-sm-1\"><div class=\"box\"><div class=\"detail-wrapper\"><p class=\"detail\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</p><span class=\"detail-label\">XP</span></div><div class=\"detail-wrapper\"><p class=\"detail\">+")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var9 string
-		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(character.ArmourClass()))
+		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(character.GetProficiencyBonus()))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/dnd/components/meta.templ`, Line: 83, Col: 62}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/dnd/components/meta.templ`, Line: 79, Col: 71}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</p><span class=\"detail-label\">Armour Class</span></div></div></div><div class=\"col-sm-6\"><div class=\"box\"></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</p><span class=\"detail-label\">Proficency Bonus</span></div></div></div><div class=\"col-sm-1\"><div class=\"box\"><div class=\"detail-wrapper\"><p class=\"detail\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var10 string
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(character.ArmourClass()))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/dnd/components/meta.templ`, Line: 87, Col: 62}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</p><span class=\"detail-label\">Armour Class</span></div></div></div><div class=\"col-sm-4\"><div class=\"box\"></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
