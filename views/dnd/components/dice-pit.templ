@@ -12,47 +12,54 @@ templ DicePit() {
         }
 
 		#DicePit {
+			position:relative;
 			padding: 1rem;
 			margin: 1rem;
-			height: 400px;
 			width: 90%;
-			overflow-y: scroll;
+			
 			background: #ddd;
 		}
 
-
 		.loader {
-			width: 48px;
-			height: 48px;
-			border-radius: 50%;
 			position: relative;
-			animation: rotate 1s linear infinite;
-			
-		}
-		.loader::before , .loader::after {
-			content: "";
-			box-sizing: border-box;
-			position: absolute;
-			inset: 0px;
+			border: 16px solid #f3f3f3;
 			border-radius: 50%;
-			border: 5px solid #FFF;
-			animation: prixClipFix 2s linear infinite ;
+			border-top: 16px solid #3498db;
+			width: 70px;
+			height: 70px;
+			left:40%;
+			top:40%;
+			-webkit-animation: spin 2s linear infinite; /* Safari */
+			animation: spin 2s linear infinite;
 		}
-		.loader::after{
-			transform: rotate3d(90, 90, 0, 180deg );
-			border-color: #FF3D00;
+		#DiceLoader{
+			opacity
+			position: absolute;
+			top:0px;
+			left:0px;
+			width: 100%;
+			height: 100%;
+			background: black;
+			opacity: .5;
+		}
+		.loader-container{
+			position:relative;
+			height: 300px;
+			width: 200px;
+			border:1px solid
 		}
 
-		@keyframes rotate {
-			0%   {transform: rotate(0deg)}
-			100%   {transform: rotate(360deg)}
+			/* Safari */
+		@-webkit-keyframes spin {
+			0% { -webkit-transform: rotate(0deg); }
+			100% { -webkit-transform: rotate(360deg); }
 		}
 
-		@keyframes prixClipFix {
-			0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-			50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-			75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
 		}
+
     </style>
 	<div class="row">
 		<div class="col-sm-12">
@@ -62,10 +69,17 @@ templ DicePit() {
 						<h6>Dice Pit</h6>
 						<p>Roll your dice here!</p>
 					</div>
-					<div class="col-4">
-						<div id="DiceLoader" class="loader htmx-indicator"></div>
+					// <div class="col-4">
+					// 	<div id="DiceLoader" class="loading-state htmx-indicator"></div>
+					// </div>
+					<div id="DicePit" class="loader-container">
+						// <div class="loading-state htmx-indicator" id="DiceLoader">
+						// 	<div class="loading"></div>
+						// </div>
+						<div id="DiceLoader">
+							<div class="loader"></div>
+						</div>
 					</div>
-					<div id="DicePit"></div>
 				</div>
 			</div>
 		</div>

@@ -90,7 +90,6 @@ templ AttributeBox(displayText string, character models.Character, attribute mod
 				class="row rounded border p-1 skill-row"
 				hx-get={ GetRollSkillURL(character, skill) }
 				hx-target="#DicePit"
-				hx-swap="beforeend scroll:bottom"
 				hx-indicator="#DiceLoader"
 			>
 				<div class="col-9">

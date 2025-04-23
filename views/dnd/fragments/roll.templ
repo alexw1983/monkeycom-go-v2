@@ -6,14 +6,25 @@ import (
 )
 
 templ Roll(r models.SkillRoll) {
-	<p>D20 = { strconv.Itoa(r.DiceRoll) }</p>
-	<p>+  { r.Ability } ( { strconv.Itoa(r.AbilityModifier ) } ) </p>
-	if r.Proficient {
-		<p>+ Proficiency Bonus ( { strconv.Itoa(r.ProficiencyBonus ) } ) </p>
-	}
-	if r.Expertise {
-		<p>+ Expertise Bonus ( { strconv.Itoa(r.ProficiencyBonus ) } ) </p>
-	}
-	<p>Total = { strconv.Itoa(r.Total()) }</p>
-	<hr/>
+	<div
+		if r.IsCriticalSuccess() {
+			class="alert alert-success"
+		}
+		else
+		if r.IsBotch() {
+			class="alert alert-danger"
+		} else {
+			class="alert alert-info"
+		}
+	>
+		<p>D20 = { strconv.Itoa(r.DiceRoll) }</p>
+		<p>+  { r.Ability } ( { strconv.Itoa(r.AbilityModifier ) } ) </p>
+		if r.Proficient {
+			<p>+ Proficiency Bonus ( { strconv.Itoa(r.ProficiencyBonus ) } ) </p>
+		}
+		if r.Expertise {
+			<p>+ Expertise Bonus ( { strconv.Itoa(r.ProficiencyBonus ) } ) </p>
+		}
+		<p><strong>Total = { strconv.Itoa(r.Total()) }</strong></p>
+	</div>
 }

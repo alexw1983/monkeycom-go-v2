@@ -73,6 +73,14 @@ func (roll SkillRoll) Total() int {
 	return roll.DiceRoll + roll.AbilityModifier
 }
 
+func (roll SkillRoll) IsCriticalSuccess() bool {
+	return roll.DiceRoll == 20
+}
+
+func (roll SkillRoll) IsBotch() bool {
+	return roll.DiceRoll == 1
+}
+
 func (c Character) IsProficient(skill Skill) bool {
 	for _, s := range c.Proficiencies {
 		if s == skill {
